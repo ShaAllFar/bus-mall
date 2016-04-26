@@ -1,0 +1,67 @@
+body{
+  margin: 0 auto;
+}
+.container{
+   display: flex;
+   flex-direction: column;
+   flex-wrap: wrap;
+   justify-content: center;
+   align-content: center;
+   width: 900px;
+   margin: 0 auto;
+   margin-top: 10px;
+}
+.logo{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+}
+.h11{
+  text-align: left;
+  font-family: 'Rubik Mono One', sans-serif;
+  font-weight: 400;
+  font-size: 75px;
+  margin: 0px;
+  color: red;
+}
+
+.h12{
+  font-family: 'Syncopate', sans-serif;
+  text-align: left;
+  font-weight: 400;
+  font-size: 80px;
+    margin: 0px;
+}
+
+hr{
+  width: 75%;
+}
+.container p{
+  text-align: left;
+  font-size: 15px;
+  text-indent: 50px
+
+}
+
+.p2{
+  margin-top: 0px;
+}
+.image-display{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+
+}
+
+.image-display img{
+  width: 250px;
+  height: 250px;
+  margin: 20px;
+  margin-bottom: 50px;
+  margin-top: 50px;
+}
