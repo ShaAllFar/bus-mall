@@ -3,10 +3,6 @@ var randomNumArray = [];
 var totalClicks = 0;
 var timesDisplayed = 0;
 var cycles = 0;
-//generate random number for parsing array
-function getRandomInt(min,max){
-  return Math.floor(Math.random() * (max - min)) + min;
-}
 //image object
 function imageOption(name,filepath,numTimesDisplayed,numTimesClicked){
   this.name = name;
@@ -20,27 +16,26 @@ imageOption.prototype.percentClicked = function(){
   return this.numTimesClicked / this.numTimesDisplayed;
 };
 
+//generate random number for parsing array
+function getRandomInt(min,max){
+  return Math.floor(Math.random() * (max - min)) + min;
+}
 //function to populate numnerarray
 function populateRanNumArray(){
-  var rand  = getRandomInt(0,imgArray.length);
-  randomNumArray.push(rand);
-  var rand2 = getRandomInt(0,imgArray.length);
-  var rand3 = getRandomInt(0,imgArray.length);
-  rand2 = getRandomInt(0,imgArray.length);
-  while(rand2 === rand){
-    rand2 = getRandomInt(0,imgArray.length);
+  for(var i = 0; i < 3; i++){
+    randomNumArray.push(getRandomInt(0,imgArray.length));
   }
-  while(rand3 === rand2 || rand3 === rand){
-    rand3 = getRandomInt(0,imgArray.length);
+  while(randomNumArray[1] === randomNumArray[0]){
+    randomNumArray[1] = getRandomInt(0,imgArray.length);
   }
-  randomNumArray.push(rand2);
-  randomNumArray.push(rand3);
+  while(randomNumArray[2] === randomNumArray[1] || randomNumArray[2] === randomNumArray[0]){
+    randomNumArray[2] = getRandomInt(0,imgArray.length);
+  }
 }
 
 //function to render images to index.html
 function renderImages(){
   populateRanNumArray();
-  console.log(randomNumArray);
   var imgLeft = document.getElementById('img-left');
   var imgMiddle = document.getElementById('img-middle');
   var imgRight = document.getElementById('img-right');
@@ -79,16 +74,18 @@ renderImages();
 var displayImages = document.getElementById('display');
 //event handler
 function handleImageClick(event){
-  event.preventDefault();
-  var clickedEl = event.target;
-  console.log(clickedEl.src);
+  cycles++;
   for(var i = 0; i < imgArray.length; i++){
-    if(clickedEl.src.toString().includes(imgArray[i].filepath)){
+    if(event.target.src.toString().includes(imgArray[i].filepath)){
       imgArray[i].numTimesClicked++;
     }
+    // console.log(event.target.id + imgArray[i].name);
+    // if(event.target.id === imgArray[i].name){
+    //   imgArray[i].numTimesClicked++;
+    //   console.log(event.target.id + imgArray[i].name);
+    // }
   }
   renderImages();
-  cycles++;
 }
 //event listener
 displayImages.addEventListener('click',handleImageClick);
