@@ -64,4 +64,9 @@ hr{
   margin: 20px;
   margin-bottom: 50px;
   margin-top: 50px;
+  transition-duration: 1s;
+}
+.image-display img:hover{
+  transform: scale(1.25);
+  transition-duration: 1s;
 }
