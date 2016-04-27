@@ -5,6 +5,7 @@
     <link href="style.css" type="text/css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Rubik+Mono+One' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Syncopate' rel='stylesheet' type='text/css'>
+    <script src="chart.js"></script>
   </head>
   <body>
     <div class="container">
@@ -15,12 +16,23 @@
       <hr>
       <p class="p1">Lumbersexual tote bag forage pop-up, neutra cold-pressed marfa literally swag brunch sriracha drinking vinegar cronut quinoa kogi. 3 wolf moon disrupt plaid, tattooed microdosing fingerstache single-origin coffee tousled wolf gluten-free health goth. Narwhal portland truffaut green juice, small batch mlkshk four dollar toast actually. Disrupt blue bottle vegan selfies four dollar toast, gluten-free raw denim dreamcatcher mixtape tattooed yr lumbersexual. Hella pinterest tofu franzen, sartorial health goth whatever shabby chic ennui tumblr 90's.</p>
       <p class="p2"> Stumptown small batch cliche, gentrify trust fund 3 wolf moon listicle drinking vinegar messenger bag tote bag typewriter slow-carb banjo salvia. Fixie bitters 8-bit yuccie ugh poutine.</p>
-      <div id="display" class="image-display">
-          <img id="img-left">
-          <img id="img-middle">
-          <img id="img-right">
+      <div id="button-display"class="btn-display">
+        <button id="button-display-chart" class="btn-display-chart">Display Chart</button>
+        <button id="button-more-cycles" class="btn-cycles">10 More Moves</button>
       </div>
-    <div>
+      <div id="display" class="image-display">
+          <img class="img-left">
+          <img class="img-middle">
+          <img class="img-right">
+      </div>
+      <div id="logo2" class="logo">
+        <h1 class="h13">Bus</h1>
+        <h1 class="h14">Mall</h1>
+      </div>
+      <hr id="hr2">
+      <p id="chart-head" class="chart-hd">Number of Times Clicked</p>
+      <canvas id="chosen-chart" class="chart" width="600px" height="500px"></canvas>
+    </div>
     <script src="app.js"></script>
   </body>
 </html>
