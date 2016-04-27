@@ -13,7 +13,7 @@ function imageOption(name,filepath,numTimesDisplayed,numTimesClicked){
 }
 //function to calculate percentage clicked
 imageOption.prototype.percentClicked = function(){
-  return this.numTimesClicked / this.numTimesDisplayed;
+  return (this.numTimesClicked / this.numTimesDisplayed) * 100;
 };
 
 //generate random number for parsing array
@@ -36,12 +36,15 @@ function populateRanNumArray(){
 //function to render images to index.html
 function renderImages(){
   populateRanNumArray();
-  var imgLeft = document.getElementById('img-left');
-  var imgMiddle = document.getElementById('img-middle');
-  var imgRight = document.getElementById('img-right');
+  var imgLeft = document.getElementsByClassName('img-left')[0];
+  var imgMiddle = document.getElementsByClassName('img-middle')[0];
+  var imgRight = document.getElementsByClassName('img-right')[0];
   imgLeft.src = imgArray[randomNumArray[0]].filepath;
+  imgLeft.id = imgArray[randomNumArray[0]].name;
   imgMiddle.src = imgArray[randomNumArray[1]].filepath;
+  imgMiddle.id = imgArray[randomNumArray[1]].name;
   imgRight.src = imgArray[randomNumArray[2]].filepath;
+  imgRight.id = imgArray[randomNumArray[2]].name;
   imgArray[randomNumArray[0]].numTimesDisplayed++;
   imgArray[randomNumArray[1]].numTimesDisplayed++;
   imgArray[randomNumArray[2]].numTimesDisplayed++;
@@ -68,24 +71,103 @@ new imageOption('unicorn','images/unicorn.jpg',0,0);
 new imageOption('usb','images/usb.gif',0,0);
 new imageOption('water-can','images/water-can.jpg',0,0);
 new imageOption('wine-glass','images/wine-glass.jpg',0,0);
+
+//chart
+
+function renderChart(){
+  var names = [];
+  var percentageChosen = [];
+  for(var i = 0; i < imgArray.length; i++){
+    names.push(imgArray[i].name);
+    percentageChosen.push(imgArray[i].numTimesClicked);
+  }
+
+  var data = {
+    labels: names,
+    datasets: [
+      {
+        data: percentageChosen,
+        backgroundColor: [
+          'red',
+          'orange',
+          'yellow',
+          'green',
+          'blue',
+          'indigo',
+          'violet',
+          '#790e08',
+          '#7d443d',
+          '#89a5bb',
+          '#ab831b',
+          '#ead83c',
+          '#22d7a5',
+          '#760567',
+          '#52f6bf',
+          '#b30000',
+          '#534317',
+          '#cf7e0b',
+          '#3017ec',
+          '#4f7c9a'
+        ],
+        hoverBackgroundColor: [
+
+        ]
+      }]
+  };
+  var chosenChart = document.getElementById('chosen-chart').getContext('2d');
+  var myPieChart = new Chart(chosenChart,{
+    type: 'pie',
+    data: data,
+    options: {
+      responsive: false
+    }
+  });
+}
+
 //use render function
 renderImages();
 //image display container
 var displayImages = document.getElementById('display');
+document.getElementById('button-display').style.visibility = 'hidden';
+document.getElementById('hr2').style.visibility = 'hidden';
+document.getElementById('logo2').style.visibility = 'hidden';
+document.getElementById('chart-head').style.visibility = 'hidden';
+
 //event handler
 function handleImageClick(event){
   cycles++;
   for(var i = 0; i < imgArray.length; i++){
-    if(event.target.src.toString().includes(imgArray[i].filepath)){
+    if(imgArray[i].name === event.target.id){
       imgArray[i].numTimesClicked++;
     }
-    // console.log(event.target.id + imgArray[i].name);
-    // if(event.target.id === imgArray[i].name){
-    //   imgArray[i].numTimesClicked++;
-    //   console.log(event.target.id + imgArray[i].name);
-    // }
   }
   renderImages();
+  if(cycles === 25){
+    document.getElementById('display').style.visibility = 'hidden';
+    document.getElementById('button-display').style.visibility = 'visible';
+  }
+  console.log(cycles);
+
 }
 //event listener
 displayImages.addEventListener('click',handleImageClick);
+//display chart button
+var btnDisplayChart = document.getElementById('button-display-chart');
+function handleBtnDisplay(event){
+  document.getElementById('chosen-chart').scrollIntoView({block: 'start', behavior: 'smooth'});
+  document.getElementById('hr2').style.visibility = 'visible';
+  document.getElementById('logo2').style.visibility = 'visible';
+  document.getElementById('chart-head').style.visibility = 'visible';
+
+  renderChart();
+}
+btnDisplayChart.addEventListener('click',handleBtnDisplay);
+var btnMoreCycles = document.getElementById('button-more-cycles');
+function handleBtnMoreChances(event){
+  document.getElementById('button-display').style.visibility = 'hidden';
+  document.getElementById('display').style.visibility = 'visible';
+
+  cycles = 15;
+}
+btnMoreCycles.addEventListener('click',handleBtnMoreChances);
+//function to toggle a div

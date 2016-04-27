@@ -39,7 +39,7 @@ body{
 hr{
   width: 75%;
 }
-.container p{
+.p1 {
   text-align: left;
   font-size: 15px;
   text-indent: 50px
@@ -48,6 +48,10 @@ hr{
 
 .p2{
   margin-top: 0px;
+  text-align: left;
+  font-size: 15px;
+  text-indent: 50px
+
 }
 .image-display{
   display: flex;
@@ -63,10 +67,58 @@ hr{
   height: 250px;
   margin: 20px;
   margin-bottom: 50px;
-  margin-top: 50px;
-  transition-duration: 1s;
+  margin-top: 0px;
 }
 .image-display img:hover{
-  transform: scale(1.25);
-  transition-duration: 1s;
+  transform: scale(1.1);
+}
+
+.btn-display{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+.btn-display-chart{
+  margin-right: 10px;
+  height: 40px;
+  width: 150px;
+  font-weight: bold;
+}
+
+.btn-cycles{
+  margin-right: 10px;
+  height: 40px;
+  width: 150px;
+  font-weight: bold;
+
+}
+.chart{
+  margin: 0 auto;
+
+}
+.chart-hd{
+  font-size: 25px;
+  text-align: center;
+  font-weight: bold;
+  margin: 0;
+}
+
+.h13{
+  text-align: left;
+  font-family: 'Rubik Mono One', sans-serif;
+  font-weight: 400;
+  font-size: 35px;
+  margin: 0px;
+  color: red;
+}
+
+.h14{
+  font-family: 'Syncopate', sans-serif;
+  text-align: left;
+  font-weight: 400;
+  font-size: 37px;
+    margin: 0px;
 }
