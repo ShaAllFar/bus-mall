@@ -157,7 +157,7 @@ function handleImageClick(event){
   }
   localStorage.setItem('pictureData', JSON.stringify(imgArray));
   renderImages();
-  if(cycles === 5){
+  if(cycles === 25){
     document.getElementById('display').style.display = 'none';
     document.getElementById('button-display').style.display = 'flex';
   }
@@ -187,7 +187,7 @@ function handleBtnMoreChances(event){
   document.getElementById('display').style.display = 'flex';
   document.getElementById('logo').style.display = 'flex';
 
-  cycles = 0;
+  cycles = 10;
 }
 btnMoreCycles.addEventListener('click',handleBtnMoreChances);
 //function to toggle a div
