@@ -141,10 +141,11 @@ function renderChart(){
 renderImages();
 //image display container
 var displayImages = document.getElementById('display');
-document.getElementById('button-display').style.visibility = 'hidden';
-document.getElementById('hr2').style.visibility = 'hidden';
-document.getElementById('logo2').style.visibility = 'hidden';
-document.getElementById('chart-head').style.visibility = 'hidden';
+document.getElementById('button-display').style.display = 'none';
+document.getElementById('hr2').style.display = 'none';
+document.getElementById('logo2').style.display = 'none';
+// document.getElementById('chart-head').style.display = 'none';
+document.getElementById('chosen-chart').style.display = 'none';
 
 //event handler
 function handleImageClick(event){
@@ -156,9 +157,9 @@ function handleImageClick(event){
   }
   localStorage.setItem('pictureData', JSON.stringify(imgArray));
   renderImages();
-  if(cycles === 25){
-    document.getElementById('display').style.visibility = 'hidden';
-    document.getElementById('button-display').style.visibility = 'visible';
+  if(cycles === 5){
+    document.getElementById('display').style.display = 'none';
+    document.getElementById('button-display').style.display = 'flex';
   }
   console.log(cycles);
 
@@ -168,20 +169,25 @@ displayImages.addEventListener('click',handleImageClick);
 //display chart button
 var btnDisplayChart = document.getElementById('button-display-chart');
 function handleBtnDisplay(event){
-  document.getElementById('chosen-chart').scrollIntoView({block: 'start', behavior: 'smooth'});
-  document.getElementById('hr2').style.visibility = 'visible';
-  document.getElementById('logo2').style.visibility = 'visible';
-  document.getElementById('chart-head').style.visibility = 'visible';
-
+  document.getElementById('chosen-chart').style.display = 'flex';
+  document.getElementById('hr2').style.display = 'flex';
+  document.getElementById('logo2').style.display = 'flex';
+  document.getElementById('button-more-cycles').style.display = 'none';
+  document.getElementById('button-display-chart').style.display = 'none';
+  document.getElementById('logo').style.display = 'none';
+  document.getElementById('hr1').style.display = 'none';
+  document.getElementById('p1').style.display = 'none';
+  document.getElementById('p2').style.display = 'none';
   renderChart();
 }
 btnDisplayChart.addEventListener('click',handleBtnDisplay);
 var btnMoreCycles = document.getElementById('button-more-cycles');
 function handleBtnMoreChances(event){
-  document.getElementById('button-display').style.visibility = 'hidden';
-  document.getElementById('display').style.visibility = 'visible';
+  document.getElementById('button-display').style.display = 'none';
+  document.getElementById('display').style.display = 'flex';
+  document.getElementById('logo').style.display = 'flex';
 
-  cycles = 15;
+  cycles = 0;
 }
 btnMoreCycles.addEventListener('click',handleBtnMoreChances);
 //function to toggle a div
