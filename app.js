@@ -1,7 +1,5 @@
 var imgArray = [];
 var randomNumArray = [];
-var totalClicks = 0;
-var timesDisplayed = 0;
 var cycles = 0;
 //image object
 function imageOption(name,filepath,numTimesDisplayed,numTimesClicked){
@@ -15,6 +13,42 @@ function imageOption(name,filepath,numTimesDisplayed,numTimesClicked){
 imageOption.prototype.percentClicked = function(){
   return (this.numTimesClicked / this.numTimesDisplayed) * 100;
 };
+//populate the array
+new imageOption('bag','images/bag.jpg',0,0);
+new imageOption('banana','images/banana.jpg',0,0);
+new imageOption('bathroom','images/bathroom.jpg',0,0);
+new imageOption('boots','images/boots.jpg',0,0);
+new imageOption('breakfast','images/breakfast.jpg',0,0);
+new imageOption('bubblegum','images/bubblegum.jpg',0,0);
+new imageOption('chair','images/chair.jpg',0,0);
+new imageOption('cthulhu','images/cthulhu.jpg',0,0);
+new imageOption('dog-duck','images/dog-duck.jpg',0,0);
+new imageOption('dragon','images/dragon.jpg',0,0);
+new imageOption('pen','images/pen.jpg',0,0);
+new imageOption('pet-sweep','images/pet-sweep.jpg',0,0);
+new imageOption('scissors','images/scissors.jpg',0,0);
+new imageOption('shark','images/shark.jpg',0,0);
+new imageOption('sweep','images/sweep.png',0,0);
+new imageOption('tauntaun','images/tauntaun.jpg',0,0);
+new imageOption('unicorn','images/unicorn.jpg',0,0);
+new imageOption('usb','images/usb.gif',0,0);
+new imageOption('water-can','images/water-can.jpg',0,0);
+new imageOption('wine-glass','images/wine-glass.jpg',0,0);
+//local storage check
+(function checkForLocalStorage(){
+  if(localStorage.pictureData){
+    console.log('Storage Exists');
+    var parsedImgData = JSON.parse(localStorage.pictureData);
+    for(var i = 0; i < imgArray.length; i++){
+      parsedImgData[i].percentClicked = function(){
+        return (this.numTimesClicked / this.numTimesDisplayed) * 100;
+      };
+    }
+    imgArray = parsedImgData;
+  }else{
+    console.log('Storage does not exist');
+  }
+})();
 
 //generate random number for parsing array
 function getRandomInt(min,max){
@@ -50,27 +84,6 @@ function renderImages(){
   imgArray[randomNumArray[2]].numTimesDisplayed++;
   randomNumArray = [];
 };
-//populate the array
-new imageOption('bag','images/bag.jpg',0,0);
-new imageOption('banana','images/banana.jpg',0,0);
-new imageOption('bathroom','images/bathroom.jpg',0,0);
-new imageOption('boots','images/boots.jpg',0,0);
-new imageOption('breakfast','images/breakfast.jpg',0,0);
-new imageOption('bubblegum','images/bubblegum.jpg',0,0);
-new imageOption('chair','images/chair.jpg',0,0);
-new imageOption('cthulhu','images/cthulhu.jpg',0,0);
-new imageOption('dog-duck','images/dog-duck.jpg',0,0);
-new imageOption('dragon','images/dragon.jpg',0,0);
-new imageOption('pen','images/pen.jpg',0,0);
-new imageOption('pet-sweep','images/pet-sweep.jpg',0,0);
-new imageOption('scissors','images/scissors.jpg',0,0);
-new imageOption('shark','images/shark.jpg',0,0);
-new imageOption('sweep','images/sweep.png',0,0);
-new imageOption('tauntaun','images/tauntaun.jpg',0,0);
-new imageOption('unicorn','images/unicorn.jpg',0,0);
-new imageOption('usb','images/usb.gif',0,0);
-new imageOption('water-can','images/water-can.jpg',0,0);
-new imageOption('wine-glass','images/wine-glass.jpg',0,0);
 
 //chart
 
@@ -141,6 +154,7 @@ function handleImageClick(event){
       imgArray[i].numTimesClicked++;
     }
   }
+  localStorage.setItem('pictureData', JSON.stringify(imgArray));
   renderImages();
   if(cycles === 25){
     document.getElementById('display').style.visibility = 'hidden';
